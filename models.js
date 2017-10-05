@@ -5,20 +5,20 @@ module.exports = function(mongoUrl) {
       console.log(err);
     }
     else{
-      console.log("connected to database")
+      console.log("connected to database hureey")
     }
     });
 
 
-    var shoeModel = mongoose.model('shoeModel', {
-        name: String,
-        days: Object
-
-
+    var Shoes = mongoose.model('Shoes', {
+        color: String,
+        size: Number,
+        brand: String,
+        in_stock: Number
     });
 
 
     return {
-      shoeModel
+      Shoes
     }
 }

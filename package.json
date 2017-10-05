@@ -1,0 +1,27 @@
+{
+  "name": "shoeapi",
+  "version": "1.0.0",
+  "description": "creating shoeapi",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zukelwa20/shoeAPI.git"
+  },
+  "author": "Makho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zukelwa20/shoeAPI/issues"
+  },
+  "homepage": "https://github.com/zukelwa20/shoeAPI#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^3.0.0",
+    "mongodb": "^2.2.31",
+    "mongoose": "^4.12.0"
+  }
+}
