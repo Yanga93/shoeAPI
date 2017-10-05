@@ -38,3 +38,10 @@ app.engine('hbs', exphbs({
 }));
 
 app.set('view engine', 'hbs');
+
+app.get("/api/shoes", shoeRoutes.shoesFun);
+app.get("/api/shoes/brand/:brandname", shoeRoutes.findAllbrand);
+app.get("/api/shoes/size/:size", shoeRoutes.sizeFun);
+app.get("/api/shoes/brand/:brandname/size/:size", shoeRoutes.brandAndSize);
+//app.post("/api/shoes/sold/:id", shoeRoutes);
+// app.post("/api/shoes", shoeRoutes);
