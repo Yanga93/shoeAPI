@@ -10,6 +10,8 @@ const models = model(process.env.MONGO_DB_URL ||"mongodb://localhost:27017/shoes
 const shoeRoutes = require('./shoe.js');
 const shoeRoute = shoeRoutes(models);
 
+const ObjectId = require('mongodb').ObjectId
+const ObjectIds = ObjectId(models)
 var app = express();
 
 app.use(express.static('public'));
@@ -39,9 +41,31 @@ app.engine('hbs', exphbs({
 
 app.set('view engine', 'hbs');
 
-app.get("/api/shoes", shoeRoutes.shoesFun);
-app.get("/api/shoes/brand/:brandname", shoeRoutes.findAllbrand);
-app.get("/api/shoes/size/:size", shoeRoutes.sizeFun);
-app.get("/api/shoes/brand/:brandname/size/:size", shoeRoutes.brandAndSize);
-//app.post("/api/shoes/sold/:id", shoeRoutes);
-// app.post("/api/shoes", shoeRoutes);
+// List all shoes in stock
+app.get("/api/shoes", shoeRoute.findAllbrand);
+
+// List all shoes for a given brand
+app.get("/api/shoes/brand/:brandname", shoeRoute.findBrand);
+
+// List all shoes for a given size
+app.get("/api/shoes/size/:size", shoeRoute.sizeFun);
+
+// List all shoes for a given brand and size
+app.get("/api/shoes/brand/:brandname/size/:size", shoeRoute.brandAndSize);
+
+// Update the stock levels when a shoe is sold
+app.post("/api/shoes/sold/:id", shoeRoute.soldShoes);
+
+// Add a new new shoe to his stock.
+app.post("/api/shoes", shoeRoute.shoesFun);
+
+
+//starting the sarver
+var server = app.listen(process.env.PORT || 3001, function(){
+
+    var host = server.address().address;
+    var port = server.address().port;
+
+    console.log('Example app listening at http://%s:%s', host, port);
+
+});
