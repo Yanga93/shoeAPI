@@ -10,8 +10,8 @@ const models = model(process.env.MONGO_DB_URL ||"mongodb://localhost:27017/shoes
 const shoeRoutes = require('./shoe.js');
 const shoeRoute = shoeRoutes(models);
 
-const ObjectId = require('mongodb').ObjectId
-const ObjectIds = ObjectId(models)
+ // const  ObjectId = require('mongodb').ObjectId
+
 var app = express();
 
 app.use(express.static('public'));
@@ -42,7 +42,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', 'hbs');
 
 // List all shoes in stock
-app.get("/api/shoes", shoeRoute.findAllbrand);
+app.get("/api/shoes", shoeRoute.findAllshoes);
 
 // List all shoes for a given brand
 app.get("/api/shoes/brand/:brandname", shoeRoute.findBrand);
@@ -54,7 +54,7 @@ app.get("/api/shoes/size/:size", shoeRoute.sizeFun);
 app.get("/api/shoes/brand/:brandname/size/:size", shoeRoute.brandAndSize);
 
 // Update the stock levels when a shoe is sold
-app.post("/api/shoes/sold/:id", shoeRoute.soldShoes);
+  app.post("/api/shoes/sold/:id", shoeRoute.soldShoes);
 
 // Add a new new shoe to his stock.
 app.post("/api/shoes", shoeRoute.shoesFun);
