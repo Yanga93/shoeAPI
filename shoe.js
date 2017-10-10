@@ -64,8 +64,7 @@ module.exports = function(models) {
         var sizeName = req.params.size
         var brandName = req.params.brandname
         models.Shoes.find({
-            size: sizeName
-        }, {
+            size: sizeName, 
             brand: brandName
         }, function(err, results) {
             if (err) {
@@ -93,6 +92,7 @@ module.exports = function(models) {
                 res.json(results)
             }
         })
+        console.log(results)
     }
 
     return {
