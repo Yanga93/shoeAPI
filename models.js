@@ -11,10 +11,22 @@ module.exports = function(mongoUrl) {
 
 
     var Shoes = mongoose.model('Shoes', {
-        color: String,
-        size: Number,
-        brand: String,
-        in_stock: Number
+        color: {
+        type: String,
+        required :"color is required"
+      },
+        size:{
+         type: Number,
+         required: "size is required"
+       },
+        brand: {
+          type: String,
+          required: "brand is required"
+        },
+        in_stock:
+        {
+           type: Number
+         }
     });
 
 

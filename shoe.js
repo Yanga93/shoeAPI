@@ -2,7 +2,7 @@ module.exports = function(models) {
 
     var shoesFun = function(req, res, next) {
         var brandName = req.body.brand
-        console.log(req.body);
+        // console.log(req.body);
         var colorName = req.body.color
         var sizeName = req.body.size
         var in_stock = req.body.in_stock
@@ -64,7 +64,7 @@ module.exports = function(models) {
         var sizeName = req.params.size
         var brandName = req.params.brandname
         models.Shoes.find({
-            size: sizeName, 
+            size: sizeName,
             brand: brandName
         }, function(err, results) {
             if (err) {
@@ -92,7 +92,7 @@ module.exports = function(models) {
                 res.json(results)
             }
         })
-        console.log(results)
+        // console.log(results)
     }
 
     return {

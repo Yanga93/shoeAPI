@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
+    <title></title>
+<center><h1>Shoe Catalogue</h1></center>
+  </head>
+  <body>
+<center><input type="button"  class="showButton" value="Show stock"></center>
+ <script class="myTemplate" type="text/handlebars-x">
+ <table>
+       <tr>
+       <th>Brand</th>
+       <th>Color</th>
+       <th>Size</th>
+       <th>In_stock</th>
+       </tr>
+
+       {{#each xxx}}
+       <tr>
+       <td>{{this.brand}}</td>
+       <td>{{this.color}}</td>
+       <td>{{this.size}}</td>
+       <td>{{this.in_stock}}</td>
+       </tr>
+       {{/each}}
+       </table>
+ </script>
+ <div class="displayStock"
+ ></div>
+  </body>
+  <script src="frontend.js" charset="utf-8"></script>
+</html>
