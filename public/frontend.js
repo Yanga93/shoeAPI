@@ -2,31 +2,25 @@ function ajaxGet(url, cb) {
     var ajaxRequest = new XMLHttpRequest();
     ajaxRequest.open('GET', url);
     ajaxRequest.onload = function() {
-        var data = JSON.parse(ajaxRequest.responseText);
+       var data = JSON.parse(ajaxRequest.responseText);
         cb(data);
     }
     ajaxRequest.send();
 }
 
-var addButton = document.querySelector(".addButton");
-var brandInput = document.querySelector(".brandInput").value;
-var colorInput = document.querySelector(".colorInput").value;
-var sizeInput = document.querySelector(".sizeInput").value;
+
+  var addButton = document.querySelector(".addButton");
+  var brandInput = document.querySelector(".brandInput");
+  var colorInput = document.querySelector(".colorInput");
+  var sizeInput = document.querySelector(".sizeInput");
 
 
-function ajaxPost(url,data, cb) {
+function ajaxPost(url, data, cb) {
 
-    var ajaxRequest =  new XMLHttpRequest();
-    ajaxRequest.open('POST', url);
-    ajaxRequest.onload = function() {
-        var datap = JSON.parse(data);
-        console.log(data);
-        cb(datap);
-    }
-
-    ajaxRequest.send();
+  qwest
+    .post(url, data)
+    .then(cb);
 }
-
 
 // get handlebars template from the script tag
 //compile it
@@ -35,8 +29,6 @@ var template = Handlebars.compile(myTemplate.innerHTML);
 
 var showButton = document.querySelector('.showButton')
 var display = document.querySelector('.displayStock');
-
-
 
 // showButton.addEventListener("click", function(){
 ajaxGet("/api/shoes", function(database) {
@@ -48,59 +40,26 @@ ajaxGet("/api/shoes", function(database) {
     })
 
 });
- // })
-addButton.addEventListener('click', function(){
-  // console.log("helo")
-ajaxPost("api/shoes", function() {
 
-var brandB = brandInput.value;
-var colorB = colorInput.value;
-var sizeB = Number(sizeInput.value);
+addButton.addEventListener("click", function(){
+  var brandB = brandInput.value;
+  var colorB = colorInput.value;
+  var sizeB = Number(sizeInput.value);
 
-document.querySelector(".brandInput").value="";
-document.querySelector(".colorInput").value="";
-document.querySelector(".sizeInput").value="";
+    var newData = {
+      brand: brandB,
+      color: colorB,
+      size: sizeB
+    };
 
-console.log(brandB);
-var newStock = {
-  brand: brandB,
-  color: colorB,
-  size: sizeB
-};
+    ajaxPost("api/shoes", newData, function() {
+      document.querySelector(".brandInput").value = "";
+      document.querySelector(".colorInput").value = "";
+      document.querySelector(".sizeInput").value = "";
 
 
-display.innerHTML = template({shoesList:newStock})
+        display.innerHTML = template({
+          shoesList: datay.newData
+        })
+    })
 })
-})
-
-
-
-
-
-
-//merge data into the template
-//put the resulting HTML into the target element
-
-// console.log(results);
-
-//display.addEventListener("click")
-
-
-
-
-
-
-
-
-
-//jquiry code
-// $(function(){
-// $ajax({
-//   type: 'GET',
-//   url: '/api/shoes',
-//   data: shoedata,
-//   success: function(data){
-//     console.log(data);
-//   }
-// })
-// })

@@ -19,10 +19,10 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-// parse application/json
+ //parse application/json
 app.use(bodyParser.json());
 
-//app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -32,6 +32,11 @@ app.use(session({
 
 app.use(flash());
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 
 
 app.engine('hbs', exphbs({

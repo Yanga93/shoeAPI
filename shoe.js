@@ -1,6 +1,9 @@
 module.exports = function(models) {
 
     var shoesFun = function(req, res, next) {
+
+      console.log(req.body);
+
         var brandName = req.body.brand
         // console.log(req.body);
         var colorName = req.body.color
