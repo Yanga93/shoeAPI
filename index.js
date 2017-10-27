@@ -64,6 +64,14 @@ app.get("/api/shoes/brand/:brandname/size/:size", shoeRoute.brandAndSize);
 // Add a new new shoe to his stock.
 app.post("/api/shoes", shoeRoute.shoesFun);
 
+//handling brand duplicates
+app.get("/api/shoes/allBrands", shoeRoute.brandDupl);
+
+//handling brands duplicates
+app.get("/api/shoes/allSize", shoeRoute.sizeDupl);
+
+
+
 
 //starting the sarver
 var server = app.listen(process.env.PORT || 3001, function(){

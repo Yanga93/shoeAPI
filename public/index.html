@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qwest/4.5.0/qwest.min.js"></script>
     <title></title>
@@ -11,38 +12,72 @@
 </head>
 
 <body>
-    <center><input type="button" class="showButton" value="Show stock"></center><br><br>
-  <center><input type="text" class="brandInput" placeholder="Add Brand">
-  <input type="text" class="colorInput" placeholder="Add Color">
-  <input type="text" class="sizeInput" placeholder="Add Size"></center><br><br>
-  <center><input type="button"  class="addButton" value="Add button"></center>
-  <br><br>
+    <center><input type="button" class="researchButton" value="search stock"></center><br><br>
+    <center><input type="text" class="brandInput" placeholder="Add Brand">
+        <input type="text" class="colorInput" placeholder="Add Color">
+        <input type="number" class="sizeInput" placeholder="Add Size">
+        <input type="number" class="instockInput" placeholder="Add stock"></center><br><br>
+<div class="errMessage"></div>
+    <center><input type="button" class="addButton" value="Add button"></center>
+    <br><br>
 
-<center><script class="myTemplate" type="text/handlebars-x">
+    <div class="displayDropdowns"></div>
+    <div class="displayStock2"></div>
+    <center>
+        <script class="myTemplate" type="text/handlebars-x">
 
-        <table>
-            <thead>
-                <th>Brand</th>
-                <th>Color</th>
-                <th>Size</th>
-                <th>In_stock</th>
-            </thead>
+            <table>
+                <thead>
+                    <th>Brand</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>In_stock</th>
+                    <th>Purchase</th>
+                </thead>
 
-            <tbody>
+                <tbody>
                 {{#each shoesList}}
-                <tr>
-                    <td>{{brand}}</td>
-                    <td>{{color}}</td>
-                    <td>{{size}}</td>
-                    <td>{{in_stock}}</td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </script>
+                {{#if in_stock}}
+                    <tr>
+                        <td>{{brand}}</td>
+                        <td>{{color}}</td>
+                        <td>{{size}}</td>
+                        <td>{{in_stock}}</td>
+                        <td><input type="button" class="bButton" onclick="buyButton('{{_id}}')" value="Buy"></td>
+                    </tr>
+                    {{/if}}
+                    {{/each}}
 
-    <div class="displayStock"></div>
+                </tbody>
+            </table>
+        </script>
+        <br><br>
+
+
+            <script class="filterTemplate" type="text/handlebars-x">
+                <li><center><select class="brandClass">
+                  <option value="" disabled selected="">Brand</option>
+                    {{#each Brand}}
+                      <option>{{this}}</option>
+                    {{/each}}
+                </select></center>
+            </script>
+
+            <script class="SizeTemplate" type="text/handlebars-x">
+                <center>
+                    <select class="sizeClass">
+                  <option value="" disabled selected="">Size</option>
+                    {{#each Size}}
+                    <option>{{this}}</option>
+                    {{/each}}
+                  </select></center></li>
+            </script>
+
+
+
+        <div class="displayStock"></div>
+    </center>
 </body>
-<script src="frontend.js" charset="utf-8"></script></center>
+<script src="frontend.js" charset="utf-8"></script>
 
 </html>

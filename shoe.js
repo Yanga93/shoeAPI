@@ -2,20 +2,17 @@ module.exports = function(models) {
 
     var shoesFun = function(req, res, next) {
 
-      console.log(req.body);
-
         var brandName = req.body.brand
-        // console.log(req.body);
         var colorName = req.body.color
         var sizeName = req.body.size
         var in_stock = req.body.in_stock
+
         models.Shoes.create({
                 color: colorName,
                 size: sizeName,
                 brand: brandName,
                 in_stock: in_stock
             },
-
             function(err, results) {
                 if (err) {
                     console.log(err)
@@ -30,7 +27,6 @@ module.exports = function(models) {
             if (err) {
                 console.log(err);
             } else {
-              //  console.log(results)
                 res.json(results);
             }
         })
@@ -44,7 +40,6 @@ module.exports = function(models) {
             if (err) {
                 console.log(err);
             } else {
-              //  console.log(results)
                 res.json(results);
             }
         })
@@ -95,15 +90,60 @@ module.exports = function(models) {
                 res.json(results)
             }
         })
-        // console.log(results)
     }
 
+    var brandDupl = function(req,res, next){
+
+         models.Shoes.find({}, function(err, results){
+        var brandD = [];
+        var brandMap = {};
+   for(var i = 0; i < results.length; i++) {
+     var resul = results[i]
+     if(brandMap[resul.brand] === undefined){
+       brandMap[resul.brand] = resul.brand
+      brandD.push(resul.brand)
+     }
+
+   }
+   if(err){
+     console.log(err);
+   }
+else{
+  res.json({brands:brandD.sort()})
+}
+ })
+
+    }
+    var sizeDupl = function(req,res, next){
+
+         models.Shoes.find({}, function(err, results){
+        var sizeD = [];
+        var sizeMap = {};
+   for(var i = 0; i < results.length; i++) {
+     var resul = results[i]
+     if(sizeMap[resul.size] === undefined){
+       sizeMap[resul.size] = resul.size
+      sizeD.push(resul.size)
+     }
+
+   }
+   if(err){
+     console.log(err);
+   }
+  else{
+  res.json({sizes:sizeD})
+  }
+  })
+
+    }
     return {
         shoesFun,
         findAllshoes,
         findBrand,
         sizeFun,
         brandAndSize,
-        soldShoes
+        soldShoes,
+        brandDupl,
+        sizeDupl
     }
 }
